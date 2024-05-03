@@ -3,16 +3,21 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Log;
 use Inertia\Inertia;
 
 Route::get('/', function () {
-    return Inertia::render('Welcome', [
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
-    ]);
+    return Inertia::render('Home');
 });
+
+$websitePages = \Illuminate\Support\Facades\File::allFiles(resource_path('js/Pages/Website'));
+foreach ($websitePages as $page) {
+    $component = explode(".", $page->getRelativePathname())[0];
+    $name = Str::kebab($component);
+    Route::get($name, function() use ($component) {
+        return Inertia::render("Website/$component");
+    });
+}
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
