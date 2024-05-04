@@ -1,3 +1,10 @@
+import { ReactNode } from "react"
+import Layout from "../../Layouts/Layout"
+
 export default function Contact() {
-    <div>Contact</div>
+    return (
+        <div>Contact</div>
+    )
 }
+
+Contact.layout = (page: ReactNode) => <Layout children={<Contact />} />

@@ -1,4 +1,4 @@
-import Layout from "../../Components/Layout"
+import Layout from "../../Layouts/Layout"
 import { ReactNode } from 'react';
 import { Link } from "@inertiajs/react";
 
@@ -10,7 +10,7 @@ export default function Home() {
                 <div className="col-span-3">
                     <article className="max-w-3xl w-full px-4">
                         <div className="text-left mb-4">
-                            <h1 className="text-3xl font-bold">Home</h1>
+                            <h1 className="text-3xl font-bold text-green-700">Home</h1>
                         </div>
                         <div className="mx-auto">
                             <h1 className="heading">Sports Saves Lives</h1>
@@ -72,8 +72,8 @@ export default function Home() {
                     </article>
                 </div>
                 <div className="col-span-1">
-                    <div className="flex flex-col items-center">
-                        <p className="tracking-wide font-medium text-stone-500">SPONSORS</p>
+                    <div className="flex flex-col items-center justify-center">
+                        <p className="tracking-wide font-medium text-stone-500 py-2">SPONSORS</p>
                         <img className="py-4" src="img/gordon-nelson.png" width={150} />
                         <img className="py-4" src="img/bc.png" width={150} />
                         <img className="py-4" src="img/lions-club.png" width={150} />

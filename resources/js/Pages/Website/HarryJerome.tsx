@@ -1,5 +1,5 @@
 import { ReactNode } from "react"
-import Layout from "../../Components/Layout"
+import Layout from "../../Layouts/Layout"
 
 export default function HarryJerome() {
     return (
@@ -7,7 +7,7 @@ export default function HarryJerome() {
             <img className="py-10" src="/img/harry-jerome.jpeg" width={750} />
             <article className="max-w-3xl w-full px-4">
                 <div className="text-left mb-4">
-                    <h1 className="text-3xl font-bold">Harry Jerome</h1>
+                    <h1 className="text-3xl font-bold text-green-700">Harry Jerome</h1>
                 </div>
                 <div className="mx-auto">
                     <h1 className="heading">Sports Saves Lives</h1>
