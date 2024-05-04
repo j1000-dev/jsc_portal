@@ -12,8 +12,7 @@ export default function HarryJerome() {
                 <div className="mx-auto">
                     <h1 className="heading">Sports Saves Lives</h1>
                     <div className="section leading-loose">
-                        For a more detailed and intimate biography by Valerie Jerome,
-                        <a className="text-sky-600 hover:underline decoration-sky-600" href="/storage/valeries-bio-for-harry-jerome.pdf" target="_blank"> click here</a>.
+                        For a more detailed and intimate biography by Valerie Jerome, <a className="text-sky-600 hover:underline decoration-sky-600" href="/storage/valeries-bio-for-harry-jerome.pdf" target="_blank">click here</a>.
                     </div>
                     <div className="section leading-loose">
                         Harry Winston Jerome was born on September 30, 1940 in Prince Albert, Sask., and moved
