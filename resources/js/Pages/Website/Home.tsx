@@ -10,7 +10,7 @@ export default function Home() {
                 <div className="col-span-3">
                     <article className="max-w-3xl w-full px-4">
                         <div className="text-left mb-4">
-                            <h1 className="text-3xl font-bold text-green-700">Home</h1>
+                            <h1 className="text-3xl font-bold">Home</h1>
                         </div>
                         <div className="mx-auto">
                             <h1 className="heading">Sports Saves Lives</h1>

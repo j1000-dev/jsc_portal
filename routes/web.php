@@ -1,8 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
-use App\Http\Middleware\EnsureCoachIsRegistered;
-use Illuminate\Foundation\Application;
+use App\Http\Middleware\EnsureCoachRegistrationStatus;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -22,7 +21,7 @@ foreach ($websitePages as $page) {
     $name = \Illuminate\Support\Str::kebab($component);
     Route::get($name, function () use ($component) {
         return Inertia::render("Website/$component");
-    });
+    })->name("website.$name");
 }
 
 /**
@@ -55,26 +54,26 @@ Route::middleware(['auth', 'verified', 'web', 'role:admin'])->group(function () 
         $name = \Illuminate\Support\Str::kebab($component);
         Route::get("/admin/$name", function () use ($component) {
             return Inertia::render("Admin/$component");
-        })->name('admin/' . $name);
+        })->name("admin.$name");
     }
 });
 
 // 2. Coaches
-Route::middleware(['auth', 'verified', 'web', 'role:coach', EnsureCoachIsRegistered::class])->group(function () {
+Route::middleware(['auth', 'verified', 'web', 'role:coach', EnsureCoachRegistrationStatus::class . ':registered'])->group(function () {
     $portalPages = \Illuminate\Support\Facades\File::allFiles(resource_path('js/Pages/Portal'));
     foreach ($portalPages as $page) {
         $component = explode(".", $page->getRelativePathname())[0];
         $name = \Illuminate\Support\Str::kebab($component);
         Route::get("/portal/$name", function () use ($component) {
             return Inertia::render("Portal/$component");
-        })->name('portal/' . $name);
+        })->name("portal.$name");
     }
 });
 
 // 3. Sign Up
 Route::get('/sign-up', function () {
     return Inertia::render('SignUp');
-})->middleware('role:coach');
+})->middleware(['auth', 'role:coach', EnsureCoachRegistrationStatus::class . ':not_registered']);
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

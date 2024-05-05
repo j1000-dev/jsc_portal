@@ -7,7 +7,7 @@ export default function HarryJerome() {
             <img className="py-10" src="/img/harry-jerome.jpeg" width={750} />
             <article className="max-w-3xl w-full px-4">
                 <div className="text-left mb-4">
-                    <h1 className="text-3xl font-bold text-green-700">Harry Jerome</h1>
+                    <h1 className="text-3xl font-bold">Harry Jerome</h1>
                 </div>
                 <div className="mx-auto">
                     <h1 className="heading">Sports Saves Lives</h1>
@@ -19,7 +19,7 @@ export default function HarryJerome() {
                         with his family to British Columbia and the Vancouver area in 1951.
                     </div>
                     <div className="section leading-loose">
-                        <img src="img/harry-jerome-2.png" className="float-right px-2" width={300} />
+                        <img src="/img/harry-jerome-2.png" className="float-right px-2" width={300} />
                         <p className="flex-grow">
                             He was a talented athlete who excelled in a variety of sports,
                             including baseball and football. But exceptional speed was his
@@ -29,7 +29,7 @@ export default function HarryJerome() {
                         </p>
                     </div>
                     <div className="section leading-loose">
-                        <img src="img/harry-jerome-3.png" width={250} className="float-left px-2" />
+                        <img src="/img/harry-jerome-3.png" width={250} className="float-left px-2" />
                         <p>
                             His accomplishments came despite his enduring considerable racism as a youngster and as a competitor —
                             testament to his courage and will to succeed despite barriers placed in his path.
@@ -42,7 +42,7 @@ export default function HarryJerome() {
                         </p>
                     </div>
                     <div className="section leading-loose">
-                        <img src="img/harry-jerome-4.png" width={250} className="float-right px-2" />
+                        <img src="/img/harry-jerome-4.png" width={250} className="float-right px-2" />
                         <p>
                             But what should have been a promising Olympic debut for Jerome became instead the first of many
                             difficult trials that served as a test of the athlete’s personal motto: Never Give Up. Jerome
@@ -54,8 +54,8 @@ export default function HarryJerome() {
                         </p>
                     </div>
                     <div className="flex justify-center items-center">
-                        <img src="img/harry-jerome-5.png" width={200} className="" />
-                        <img src="img/harry-jerome-6.png" width={425} className="" />
+                        <img src="/img/harry-jerome-5.png" width={200} className="" />
+                        <img src="/img/harry-jerome-6.png" width={425} className="" />
                     </div>
                     <div className="section leading-loose">
                         <p>
@@ -83,7 +83,7 @@ export default function HarryJerome() {
                             confirming that despite the array of physical troubles and negative press that had plagued
                             him over the years, he never gave up.
                         </p>
-                        <img src="img/harry-jerome-8.png" className="mx-auto w-96 h-96" />
+                        <img src="/img/harry-jerome-8.png" className="mx-auto w-96 h-96" />
                     </div>
                     <div className="section leading-loose">
                         <p>
@@ -96,8 +96,8 @@ export default function HarryJerome() {
                         </p>
                     </div>
                     <div className="flex justify-center">
-                        <img src="img/harry-jerome-10.png" className="w-80 h-96" />
-                        <img src="img/harry-jerome-9.png" className="h-96" />
+                        <img src="/img/harry-jerome-10.png" className="w-80 h-96" />
+                        <img src="/img/harry-jerome-9.png" className="h-96" />
                     </div>
                     <div className="section leading-loose">
                         <p>
