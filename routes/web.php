@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Middleware\EnsureCoachIsRegistered;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
@@ -10,44 +11,31 @@ Route::get('/', function () {
     return redirect('/home');
 });
 
+/**
+ * 
+ * JEROME SPORTS CANADA ROUTES
+ *  
+ **/
 $websitePages = \Illuminate\Support\Facades\File::allFiles(resource_path('js/Pages/Website'));
 foreach ($websitePages as $page) {
     $component = explode(".", $page->getRelativePathname())[0];
     $name = \Illuminate\Support\Str::kebab($component);
-    Route::get($name, function() use ($component) {
+    Route::get($name, function () use ($component) {
         return Inertia::render("Website/$component");
     });
 }
 
-//Coaches
-Route::middleware(['auth', 'verified', 'web', 'role:coach'])->group(function () {
-    $portalPages = \Illuminate\Support\Facades\File::allFiles(resource_path('js/Pages/Portal'));
-    foreach ($portalPages as $page) {
-        $component = explode(".", $page->getRelativePathname())[0];
-        $name = \Illuminate\Support\Str::kebab($component);
-        Route::get("/portal/$name", function() use ($component) {
-            return Inertia::render("Portal/$component");
-        })->name('portal/'.$name);
-    }
-});
-
-//Admin
-Route::middleware(['auth', 'verified', 'web', 'role:admin'])->group(function () {
-    $portalPages = \Illuminate\Support\Facades\File::allFiles(resource_path('js/Pages/Admin'));
-    foreach ($portalPages as $page) {
-        $component = explode(".", $page->getRelativePathname())[0];
-        $name = \Illuminate\Support\Str::kebab($component);
-        Route::get("/admin/$name", function() use ($component) {
-            return Inertia::render("Admin/$component");
-        })->name('admin/'.$name);
-    }
-});
+/**
+ * 
+ * COACHING PORTAL ROUTES
+ *
+ **/
 
 /**
  * REROUTING
  * 1. Admin get rerouted to admin pages
- * 2. Coaches get rerouted to coach pages
- * 3. Coaches who have not filled out form get sent to sign up
+ * 2. Registered coaches get routed to coach pages
+ * 3. Coaches who have not filled out registration form get sent to sign up
  **/
 Route::get('/dashboard', function (Request $request) {
     if ($request->user()->hasRole('admin')) {
@@ -55,9 +43,38 @@ Route::get('/dashboard', function (Request $request) {
     } else if ($request->user()->hasRole('coach') && $request->user()->registered) {
         return redirect('/portal/dashboard');
     } else {
-        return redirect ('/portal/sign-up');
+        return redirect('/sign-up');
     }
 })->middleware(['auth', 'verified'])->name('dashboard');
+
+// 1. Admin
+Route::middleware(['auth', 'verified', 'web', 'role:admin'])->group(function () {
+    $portalPages = \Illuminate\Support\Facades\File::allFiles(resource_path('js/Pages/Admin'));
+    foreach ($portalPages as $page) {
+        $component = explode(".", $page->getRelativePathname())[0];
+        $name = \Illuminate\Support\Str::kebab($component);
+        Route::get("/admin/$name", function () use ($component) {
+            return Inertia::render("Admin/$component");
+        })->name('admin/' . $name);
+    }
+});
+
+// 2. Coaches
+Route::middleware(['auth', 'verified', 'web', 'role:coach', EnsureCoachIsRegistered::class])->group(function () {
+    $portalPages = \Illuminate\Support\Facades\File::allFiles(resource_path('js/Pages/Portal'));
+    foreach ($portalPages as $page) {
+        $component = explode(".", $page->getRelativePathname())[0];
+        $name = \Illuminate\Support\Str::kebab($component);
+        Route::get("/portal/$name", function () use ($component) {
+            return Inertia::render("Portal/$component");
+        })->name('portal/' . $name);
+    }
+});
+
+// 3. Sign Up
+Route::get('/sign-up', function () {
+    return Inertia::render('SignUp');
+})->middleware('role:coach');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -65,4 +82,4 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

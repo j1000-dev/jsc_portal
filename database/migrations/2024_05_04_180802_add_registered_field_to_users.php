@@ -4,7 +4,6 @@ use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-use Spatie\Permission\Models\Role;
 
 return new class extends Migration
 {
@@ -13,8 +12,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Role::create(['name' => 'admin']);
-        Role::create(['name' => 'coach']);
+        Schema::table('users', function (Blueprint $table) {
+            $table->boolean('registered')->default(false);
+        });
     }
 
     /**
@@ -22,8 +22,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('roles', function (Blueprint $table) {
-            //
+        Schema::table('users', function (Blueprint $table) {
+            $table->dropColumn('registered');
         });
     }
 };
