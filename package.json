@@ -21,11 +21,13 @@
         "vite": "^5.0"
     },
     "dependencies": {
+        "@ant-design/icons": "^5.3.7",
         "@types/jest": "^29.5.12",
         "@types/node": "^20.12.8",
         "@types/react": "^18.3.1",
         "@types/react-dom": "^18.3.0",
-        "primereact": "^10.6.5",
+        "antd": "^5.17.0",
+        "date-fns": "^3.6.0",
         "react-google-autocomplete": "^2.7.3",
         "typescript": "^5.4.5"
     }

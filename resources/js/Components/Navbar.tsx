@@ -26,7 +26,7 @@ export default function Navbar() {
                 <Link
                     key={id}
                     href={'/' + link.replace(' ', "-").toLowerCase()}
-                    className={`px-3 tracking-tight font-semibold ${isCurrentPage(link) ? 'text-gray-500' : 'text-red-800'}`}
+                    className={`px-3 tracking-tight font-semibold ${isCurrentPage(link) ? 'text-gray-500' : 'text-red-800 hover:text-gray-400'}`}
                 >
                     {link}
                 </Link>

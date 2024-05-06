@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SignUpController;
+use App\Http\Controllers\SportsController;
 use App\Http\Middleware\EnsureCoachRegistrationStatus;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
@@ -71,9 +73,11 @@ Route::middleware(['auth', 'verified', 'web', 'role:coach', EnsureCoachRegistrat
 });
 
 // 3. Sign Up
-Route::get('/sign-up', function () {
-    return Inertia::render('SignUp');
-})->middleware(['auth', 'role:coach', EnsureCoachRegistrationStatus::class . ':not_registered']);
+Route::middleware(['auth', 'role:coach', EnsureCoachRegistrationStatus::class . ':not_registered'])->group(function () {
+    Route::get('/sign-up', [SignUpController::class, 'showSignUpForm'])->name('sign-up');
+    Route::post('/sign-up', [SignUpController::class, 'submitSignUpForm'])->name('sign-up.submit');
+    Route::get('/sports', [SportsController::class, 'index']);
+});
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
