@@ -28,7 +28,7 @@ foreach ($websitePages as $page) {
 
 /**
  * 
- * COACHING PORTAL ROUTES
+ * PORTAL ROUTES
  *
  **/
 
@@ -74,9 +74,9 @@ Route::middleware(['auth', 'verified', 'web', 'role:coach', EnsureCoachRegistrat
 
 // 3. Sign Up
 Route::middleware(['auth', 'role:coach', EnsureCoachRegistrationStatus::class . ':not_registered'])->group(function () {
-    Route::get('/sign-up', [SignUpController::class, 'showSignUpForm'])->name('sign-up');
+    Route::get('/sign-up', [SignUpController::class, 'showSignUpForm'])->name('sign-up.form');
     Route::post('/sign-up', [SignUpController::class, 'submitSignUpForm'])->name('sign-up.submit');
-    Route::get('/sports', [SportsController::class, 'index']);
+    Route::get('/sports', [SportsController::class, 'index'])->name('sign-up.sports');
 });
 
 Route::middleware('auth')->group(function () {
