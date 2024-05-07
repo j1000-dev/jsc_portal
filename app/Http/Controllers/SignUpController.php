@@ -43,10 +43,6 @@ class SignUpController extends Controller
             $data['dob'] = Carbon::parse($request->input('dob'));
             $data['image_path'] = $imagePath;
             $data['sport_options'] = json_encode($request->input('sport_options'));
-            $data['university_bio_link'] = $request->input('university_bio_link') ?? null;
-            $data['biography'] = $request->input('biography') ?? null;
-            $data['faculty'] = $request->input('faculty') ?? null;
-            $data['program'] = $request->input('program') ?? null;
 
             UserInfo::create($data);
             User::where('id', $request->user()->id)->update(['registered' => 1]);
