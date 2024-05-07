@@ -6,9 +6,8 @@ import axios from "axios";
 import dayjs from 'dayjs';
 import { format } from 'date-fns';
 // Ant Design imports
-import { DatePicker, Input, Radio, Form, Image, Upload, Button, Checkbox, Row, Col } from "antd";
+import { DatePicker, Input, Radio, Form, Image, Upload, Button, Checkbox, Row, Col, message } from "antd";
 import type { RadioChangeEvent, FormProps } from 'antd';
-import { useForm } from "antd/es/form/Form";
 import { Rule } from 'antd/lib/form';
 import { UploadOutlined } from '@ant-design/icons';
 
@@ -32,8 +31,10 @@ interface Form {
     first_name: string;
     last_name: string;
     address: string;
+    street_number: string;
     city: string;
     province: string;
+    postal_code: string;
     dob: string;
     has_car: boolean;
     university_bio_link: string | null;
@@ -46,11 +47,12 @@ interface Form {
 };
 
 export default function SignUp() {
-    const [form] = useForm();
+    const [form] = Form.useForm();
     const [imagePath, setImagePath] = useState<string>('');
     const [hasCar, setHasCar] = useState<boolean>();
     const [bioRequired, setBioRequired] = useState<boolean>(true);
     const [sportOptions, setSportOptions] = useState<SportOptions[]>([]);
+    const [messageApi, contextHolder] = message.useMessage();
     const { TextArea } = Input;
 
     useEffect(() => {
@@ -101,12 +103,42 @@ export default function SignUp() {
     }
 
     const onFinish: FormProps<Form>['onFinish'] = (values) => {
-        console.log('Success:', values);
+        const formData = new FormData();
+        // Append form values to FormData
+        Object.entries(values).forEach(([key, value]) => {
+            formData.append(key, value);
+        });
+        axios.post('/sign-up', formData)
+            .then((response) => {
+                messageApi.open({
+                    type: 'success',
+                    content: 'Success!',
+                });
+                window.location.pathname = '/portal/dashboard';
+            })
+            .catch((error): void => {
+                const { response: { data: { errors } } } = error;
+                messageApi.open({
+                    type: 'error',
+                    content: `There was an error submitting the form!`,
+                    duration: 5
+                });
+                const errorMessages = Object.values(errors).flatMap((e) => e);
+                errorMessages.forEach((e) => {
+                    messageApi.open({
+                        type: 'warning',
+                        content: String(e),
+                        duration: 5
+                    });
+                });
+                console.log('Error: ', error);
+            });
     };
 
     return (
         <div className="md:mx-auto pt-10 h-screen w-full">
             <div className="flex flex-col items-center">
+                {contextHolder}
                 <div className="border-t border-b border-gray-100"><Banner /></div>
                 <Form
                     form={form}
@@ -129,11 +161,18 @@ export default function SignUp() {
                         <Upload
                             maxCount={1}
                             beforeUpload={(file: File) => {
+                                if (!['image/png', 'image/jpeg'].includes(file.type)) {
+                                    messageApi.open({
+                                        type: 'error',
+                                        content: `Image is not a png or jpeg file!`,
+                                    });
+                                    return Upload.LIST_IGNORE;
+                                }
                                 const reader = new FileReader();
                                 reader.onloadend = () => {
                                     if (typeof reader.result === 'string') {
-                                        form.setFieldValue('image_path', reader.result)
-                                        setImagePath(reader.result)
+                                        setImagePath(reader.result);
+                                        form.setFieldValue('image_path', file)
                                     }
                                 };
                                 reader.readAsDataURL(file);
@@ -162,14 +201,15 @@ export default function SignUp() {
                                 <Autocomplete
                                     apiKey={window.env.GOOGLE_MAPS_API_KEY}
                                     onPlaceSelected={(place) => {
-                                        let location = getLocationComponent(place, ['locality', 'administrative_area_level_1', 'postal_code']);
+                                        let location = getLocationComponent(place, ['street_number', 'locality', 'administrative_area_level_1', 'postal_code']);
                                         form.setFieldsValue({
                                             'address': place.formatted_address,
                                             'city': location.locality.long_name,
                                             'province': location.administrative_area_level_1.short_name,
-                                            'postal_code': location.postal_code.long_name
-                                        })
-                                        form.setFieldValue('city', location.locality.long_name)
+                                            'postal_code': location.postal_code.long_name,
+                                            'street_number': location.street_number.short_name
+                                        });
+                                        form.setFieldValue('city', location.locality.long_name);
                                     }}
                                     className="w-full block rounded-lg hover:border-blue-500 placeholder-gray-400"
                                     placeholder="Enter full address"
@@ -192,6 +232,12 @@ export default function SignUp() {
                                 hidden // Hide province as it's automatically populated in address
                             ><Input /></Form.Item>
                             <Form.Item
+                                name="street_number"
+                                label="Street Number"
+                                initialValue={''}
+                                hidden // Hide street_number as it's automatically populated in address
+                            ><Input /></Form.Item>
+                            <Form.Item
                                 name="dob"
                                 label="Date of Birth (yyyy/mm/dd)"
                                 rules={[{ required: true, message: 'Please enter your birthday!' }]}
@@ -201,7 +247,7 @@ export default function SignUp() {
                                     size="large"
                                     maxDate={dayjs(format(new Date(), 'yyyy-MM-dd'), 'YYYY/MM/DD')}
                                     onChange={(date) => {
-                                        form.setFieldValue('dob', date)
+                                        form.setFieldValue('dob', date);
                                     }}
                                     placeholder="Enter date of birth"
                                     className="w-full"
@@ -246,7 +292,7 @@ export default function SignUp() {
                                 label="Current year of study or year of degree (or high school grade)"
                                 rules={[
                                     { required: true, message: 'Please enter a year or grade!' },
-                                    { validator: validateYearOfStudy } // Apply custom validation
+                                    { validator: validateYearOfStudy }
                                 ]}
                             >
                                 <Input placeholder="Enter year of study / degree / high school grade" className="block rounded-lg" />
@@ -307,5 +353,5 @@ export default function SignUp() {
                 </Form>
             </div>
         </div>
-    )
+    );
 }
