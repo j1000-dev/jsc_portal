@@ -1,9 +1,8 @@
 <?php
 
-use App\Models\Sports;
+use App\Models\CoachingLevel;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
-use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
@@ -13,10 +12,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('sports', function (Blueprint $table) {
+        Schema::create('coaching_levels', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->string('name');
+            $table->string('coaching_level');
+            $table->string('description');
+            $table->decimal('rate');
+            $table->decimal('travel');
         });
     }
 
@@ -25,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('sports');
+        Schema::dropIfExists('coaching_levels');
     }
 };

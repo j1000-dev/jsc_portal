@@ -13,7 +13,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->boolean('registered')->default(false);
+            $table->boolean('registered')->default(0);
+            $table->boolean('is_validated')->default(0);
+            $table->unsignedTinyInteger('coaching_lvl')->default(0);
         });
     }
 

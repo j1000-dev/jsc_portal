@@ -49,7 +49,7 @@ Route::get('/dashboard', function (Request $request) {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 // 1. Admin
-Route::middleware(['auth', 'verified', 'web', 'role:admin'])->group(function () {
+Route::middleware(['auth', 'verified', 'web', 'role:Admin'])->group(function () {
     $portalPages = \Illuminate\Support\Facades\File::allFiles(resource_path('js/Pages/Admin'));
     foreach ($portalPages as $page) {
         $component = explode(".", $page->getRelativePathname())[0];
@@ -61,7 +61,7 @@ Route::middleware(['auth', 'verified', 'web', 'role:admin'])->group(function () 
 });
 
 // 2. Coaches
-Route::middleware(['auth', 'verified', 'web', 'role:coach', EnsureCoachRegistrationStatus::class . ':registered'])->group(function () {
+Route::middleware(['auth', 'verified', 'web', 'role:Coach', EnsureCoachRegistrationStatus::class . ':registered'])->group(function () {
     $portalPages = \Illuminate\Support\Facades\File::allFiles(resource_path('js/Pages/Portal'));
     foreach ($portalPages as $page) {
         $component = explode(".", $page->getRelativePathname())[0];
@@ -73,7 +73,7 @@ Route::middleware(['auth', 'verified', 'web', 'role:coach', EnsureCoachRegistrat
 });
 
 // 3. Sign Up
-Route::middleware(['auth', 'role:coach', EnsureCoachRegistrationStatus::class . ':not_registered'])->group(function () {
+Route::middleware(['auth', 'role:Coach', EnsureCoachRegistrationStatus::class . ':not_registered'])->group(function () {
     Route::get('/sign-up', [SignUpController::class, 'showSignUpForm'])->name('sign-up.form');
     Route::post('/sign-up', [SignUpController::class, 'submitSignUpForm'])->name('sign-up.submit');
     Route::get('/sports', [SportsController::class, 'index'])->name('sign-up.sports');

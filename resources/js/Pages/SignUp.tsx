@@ -39,10 +39,13 @@ interface Form {
     has_car: boolean;
     university_bio_link: string | null;
     biography: string | null;
+    one_line_bio: string | null;
     school_name: string;
     faculty: string | null;
     program: string | null;
     year_of_study: string;
+    cellphone_number: string;
+    emergency_contact_number: string;
     sport_options: Array<number>;
 };
 
@@ -160,6 +163,7 @@ export default function SignUp() {
                     >
                         <Upload
                             maxCount={1}
+                            onRemove={() => setImagePath('/img/blank-profile-picture.png')}
                             beforeUpload={(file: File) => {
                                 if (!['image/png', 'image/jpeg'].includes(file.type)) {
                                     messageApi.open({
@@ -172,7 +176,7 @@ export default function SignUp() {
                                 reader.onloadend = () => {
                                     if (typeof reader.result === 'string') {
                                         setImagePath(reader.result);
-                                        form.setFieldValue('image_path', file)
+                                        form.setFieldValue('image_path', file);
                                     }
                                 };
                                 reader.readAsDataURL(file);
@@ -209,7 +213,6 @@ export default function SignUp() {
                                             'postal_code': location.postal_code.long_name,
                                             'street_number': location.street_number.short_name
                                         });
-                                        form.setFieldValue('city', location.locality.long_name);
                                     }}
                                     className="w-full block rounded-lg hover:border-blue-500 placeholder-gray-400"
                                     placeholder="Enter full address"
@@ -237,6 +240,12 @@ export default function SignUp() {
                                 initialValue={''}
                                 hidden // Hide street_number as it's automatically populated in address
                             ><Input /></Form.Item>
+                                <Form.Item
+                                name="postal_code"
+                                label="Postal Code"
+                                initialValue={''}
+                                hidden // Hide postal_code as it's automatically populated in address
+                            ><Input /></Form.Item>
                             <Form.Item
                                 name="dob"
                                 label="Date of Birth (yyyy/mm/dd)"
@@ -255,8 +264,8 @@ export default function SignUp() {
                             </Form.Item>
                             <Form.Item className="flex justify-center items-center" name="has_car" label="Car Accessibility" rules={[{ required: true, message: 'Please enter your car accessibility!' }]}>
                                 <Radio.Group value={hasCar} onChange={(e: RadioChangeEvent) => setHasCar(e.target.value)}>
-                                    <Radio value={true}>Yes</Radio>
-                                    <Radio value={false}>No</Radio>
+                                    <Radio value={1}>Yes</Radio>
+                                    <Radio value={0}>No</Radio>
                                 </Radio.Group>
                             </Form.Item>
                             <Form.Item name="university_bio_link" label="University Biography Link (optional)">
@@ -277,6 +286,16 @@ export default function SignUp() {
                             </Form.Item>
                             <Form.Item name="biography" label="Biography" rules={[{ required: bioRequired, message: 'Please enter your biography!' }]}>
                                 <TextArea placeholder="Enter biography" autoSize={{ minRows: 2 }} />
+                            </Form.Item>
+                            <Form.Item name="one_line_bio" label="One Line Biography (max 50 characters)" rules={[{required: true, message: 'Please enter your one line biography!'}]}>
+                                <Input 
+                                    placeholder="Enter one line bio" 
+                                    className="block rounded-lg"
+                                    count={{
+                                        show: true,
+                                        max: 50,
+                                    }}
+                                />
                             </Form.Item>
                             <Form.Item name="school_name" label="University (or High School)" rules={[{ required: true, message: 'Please enter your school!' }]}>
                                 <Input placeholder="Enter institution" className="block rounded-lg" />
