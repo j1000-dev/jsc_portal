@@ -41,7 +41,7 @@ class SignUpController extends Controller
             // Extra Formatting
             $data['user_id'] = $request->user()->id;
             $data['dob'] = Carbon::parse($request->input('dob'));
-            $data['image_path'] = $imagePath;
+            $data['image_path'] = env('AWS_PUBLIC_URL') . $imagePath;
             $data['sport_options'] = json_encode($request->input('sport_options'));
 
             UserInfo::create($data);

@@ -20,7 +20,8 @@ class CoachingLevelSeeder extends Seeder
                     'coaching_level' => $coachData['coaching_level'],
                     'description' => $coachData['description'],
                     'rate' => $coachData['rate'],
-                    'travel' => $coachData['travel']
+                    'travel' => $coachData['travel'],
+                    'value' => $coachData['value']
                 ]);
             }
         }

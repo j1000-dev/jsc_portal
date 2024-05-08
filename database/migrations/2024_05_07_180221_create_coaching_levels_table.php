@@ -15,6 +15,7 @@ return new class extends Migration
         Schema::create('coaching_levels', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+            $table->unsignedTinyInteger('value');
             $table->string('coaching_level');
             $table->string('description');
             $table->decimal('rate');

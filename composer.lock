@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f8c990b6a016b641fd75a1ce5608d3be",
+    "content-hash": "bc91a21e8fa8069730fcf7280e62ba4e",
     "packages": [
         {
             "name": "aws/aws-crt-php",
@@ -4156,6 +4156,65 @@
                 }
             ],
             "time": "2024-03-06T16:03:49+00:00"
+        },
+        {
+            "name": "sereny/nova-permissions",
+            "version": "v1.6.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/serenysoft/nova-permissions.git",
+                "reference": "f754aa000008b543e21659888ff6964a22a1e686"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/serenysoft/nova-permissions/zipball/f754aa000008b543e21659888ff6964a22a1e686",
+                "reference": "f754aa000008b543e21659888ff6964a22a1e686",
+                "shasum": ""
+            },
+            "require": {
+                "laravel/nova": "^4.0",
+                "php": "^7.3|^8.0",
+                "spatie/laravel-permission": "^6.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Sereny\\NovaPermissions\\ToolServiceProvider"
+                    ]
+                },
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Sereny\\NovaPermissions\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Leandro Guindani Gehlen",
+                    "email": "leandrogehlen@gmail.com",
+                    "homepage": "https://github.com/leandrogehlen"
+                }
+            ],
+            "description": "Laravel Nova 4 Grouped Permissions",
+            "keywords": [
+                "laravel",
+                "nova",
+                "permission",
+                "role"
+            ],
+            "support": {
+                "issues": "https://github.com/serenysoft/nova-permission/issues?state=open",
+                "source": "https://github.com/serenysoft/nova-permission"
+            },
+            "time": "2024-05-06T20:06:09+00:00"
         },
         {
             "name": "spatie/laravel-permission",
