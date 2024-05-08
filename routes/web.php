@@ -39,9 +39,9 @@ foreach ($websitePages as $page) {
  * 3. Coaches who have not filled out registration form get sent to sign up
  **/
 Route::get('/dashboard', function (Request $request) {
-    if ($request->user()->hasRole('admin')) {
+    if ($request->user()->hasRole('Admin')) {
         return redirect('/admin/dashboard');
-    } else if ($request->user()->hasRole('coach') && $request->user()->registered) {
+    } else if ($request->user()->hasRole('Coach') && $request->user()->registered) {
         return redirect('/portal/dashboard');
     } else {
         return redirect('/sign-up');
