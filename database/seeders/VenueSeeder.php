@@ -15,7 +15,9 @@ class VenueSeeder extends Seeder
     {
         $venues = new Venue();
         foreach (config('seeder.venues') as $v) {
-            $venues->create($v);
+            if (!Venue::where('name',$v['name'])->first()) {
+                $venues->create($v);
+            }
         }
     }
 }

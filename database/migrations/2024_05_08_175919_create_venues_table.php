@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('venues', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->string('name');
+            $table->string('name')->unique();
             $table->string('city')->nullable();
             $table->string('province')->nullable();
             $table->boolean('enabled')->default(1);

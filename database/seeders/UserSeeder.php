@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\User;
 use Illuminate\Database\Seeder;
+use Spatie\Permission\Models\Permission;
 
 class UserSeeder extends Seeder
 {
@@ -21,6 +22,10 @@ class UserSeeder extends Seeder
                     'password' => bcrypt($defaultUser['password']),
                     'remember_token' => null
                 ]);
+            }
+            if (in_array('Admin', $defaultUser['roles'])) {
+                $user->where('email', $defaultUser['email'])
+                    ->first()->givePermissionTo(Permission::all());
             }
         }
     }
