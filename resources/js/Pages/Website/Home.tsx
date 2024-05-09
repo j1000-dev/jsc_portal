@@ -1,4 +1,4 @@
-import Layout from "../../Layouts/Layout"
+import Layout from "@/Layouts/Layout"
 import { ReactNode } from 'react';
 import { Link } from "@inertiajs/react";
 

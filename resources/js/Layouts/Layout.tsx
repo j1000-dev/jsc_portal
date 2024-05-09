@@ -1,7 +1,7 @@
 import { ReactNode } from "react"
-import Banner from "../Components/Banner"
-import Navbar from "../Components/Navbar"
-import Footer from "../Components/Footer"
+import Banner from "@/Components/Banner"
+import Navbar from "@/Components/Navbar"
+import Footer from "@/Components/Footer"
 
 export default function Layout({children}: {children: ReactNode}) {
     return (

@@ -1,6 +1,6 @@
 import { ReactNode } from "react"
-import Layout from "../../Layouts/Layout"
-import Login from "../Auth/Login"
+import Layout from "@/Layouts/Layout"
+import Login from "@/Pages/Auth/Login"
 
 export default function Registry() {
     return (

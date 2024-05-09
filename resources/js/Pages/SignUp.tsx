@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import Banner from "../Components/Banner";
+import Banner from "@/Components/Banner";
 import Autocomplete from "react-google-autocomplete";
 import axios from "axios";
 //Date imports

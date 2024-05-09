@@ -2,7 +2,7 @@ import { ReactNode } from 'react';
 import { usePage } from '@inertiajs/react';
 import { Link } from '@inertiajs/react';
 import { Layout } from 'antd';
-import { SettingFilled } from '@ant-design/icons';
+import { LockOutlined } from '@ant-design/icons';
 const { Header } = Layout;
 
 
@@ -16,10 +16,10 @@ export default function PortalNavbar({ children, type }: { children: ReactNode; 
         <Layout>
             <Header className='flex items-center justify-between bg-red-900'>
                 <h1 className="tracking-wide text-white text-lg">Welcome {auth?.user?.name || 'Guest'}!</h1>
-                <div className="flex items-center justify-center w-48">
+                <div className="flex items-center place-content-around w-40">
                     {isAdmin() && (
                         <a href="/nova">
-                            <SettingFilled className="text-white px-4 hover:text-gray-400" style={{ fontSize: '20px' }} />
+                            <LockOutlined className="text-gray-300 space-x-4 hover:text-gray-400" style={{ fontSize: '20px' }} />
                         </a>
                     )}
                     <Link
@@ -34,9 +34,7 @@ export default function PortalNavbar({ children, type }: { children: ReactNode; 
                             focus:ring-offset-2 transition ease-in-out duration-150"
                         as="button"
                         type="button"
-                    >
-                        Log Out
-                    </Link>
+                    >Log Out</Link>
                 </div>
             </Header>
         </Layout>

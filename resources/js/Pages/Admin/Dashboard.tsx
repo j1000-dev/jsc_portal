@@ -1,5 +1,5 @@
 import { ReactNode } from "react"
-import PortalNavbar from "../../Layouts/PortalNavbar";
+import PortalNavbar from "@/Layouts/PortalNavbar";
 
 export default function Dashboard() {
     return (
