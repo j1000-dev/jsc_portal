@@ -11,6 +11,10 @@ class UserInfo extends Model
 
     protected $table = 'user_info';
 
+    protected $casts = [
+        'sport_options' => 'array'
+    ];
+
     protected $fillable = [
         'user_id',
         'image_path',
@@ -33,4 +37,9 @@ class UserInfo extends Model
         'emergency_contact_number',
         'sport_options'
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

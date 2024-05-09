@@ -47,7 +47,13 @@ class User extends Authenticatable
         ];
     }
 
-    public function userInfo() {
+    public function userInfo()
+    {
         return $this->hasOne(UserInfo::class);
+    }
+
+    public function coachingLevel()
+    {
+        return $this->belongsTo(CoachingLevel::class, 'coaching_lvl');
     }
 }

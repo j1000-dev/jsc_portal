@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Sport;
 use App\Models\User;
 use App\Models\UserInfo;
 use Carbon\Carbon;
@@ -38,11 +39,16 @@ class SignUpController extends Controller
             $imagePath = $this->uploadImageToS3($request->file('image_path'), $request->user()->email);
             $data = $request->all();
 
-            // Extra Formatting
+            // Formatting
             $data['user_id'] = $request->user()->id;
             $data['dob'] = Carbon::parse($request->input('dob'));
             $data['image_path'] = env('AWS_PUBLIC_URL') . $imagePath;
-            $data['sport_options'] = json_encode($request->input('sport_options'));
+            // Sport options formatting for nova
+            $allSports = Sport::pluck('name')->toArray();
+            $sportOptions = explode(",", $request->input('sport_options'));
+            $selectedSports = array_fill_keys($sportOptions, true);
+            $unselectedSports = array_fill_keys(array_diff($allSports, $sportOptions), false);
+            $data['sport_options'] = array_merge($selectedSports, $unselectedSports);
 
             UserInfo::create($data);
             User::where('id', $request->user()->id)->update(['registered' => 1]);

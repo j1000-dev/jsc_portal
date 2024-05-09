@@ -240,7 +240,7 @@ export default function SignUp() {
                                 initialValue={''}
                                 hidden // Hide street_number as it's automatically populated in address
                             ><Input /></Form.Item>
-                                <Form.Item
+                            <Form.Item
                                 name="postal_code"
                                 label="Postal Code"
                                 initialValue={''}
@@ -287,9 +287,9 @@ export default function SignUp() {
                             <Form.Item name="biography" label="Biography" rules={[{ required: bioRequired, message: 'Please enter your biography!' }]}>
                                 <TextArea placeholder="Enter biography" autoSize={{ minRows: 2 }} />
                             </Form.Item>
-                            <Form.Item name="one_line_bio" label="One Line Biography (max 50 characters)" rules={[{required: true, message: 'Please enter your one line biography!'}]}>
-                                <Input 
-                                    placeholder="Enter one line bio" 
+                            <Form.Item name="one_line_bio" label="One Line Biography (max 50 characters)" rules={[{ required: true, message: 'Please enter your one line biography!' }]}>
+                                <Input
+                                    placeholder="Enter one line bio"
                                     className="block rounded-lg"
                                     count={{
                                         show: true,
@@ -356,7 +356,7 @@ export default function SignUp() {
                                     <Row gutter={[16, 16]}>
                                         {sportOptions.map((sport: SportOptions) => (
                                             <Col key={sport.value} span={8}>
-                                                <Checkbox value={sport.value} className="font-bold">{sport.label}</Checkbox>
+                                                <Checkbox value={sport.label} className="font-bold">{sport.label}</Checkbox>
                                             </Col>
                                         ))}
                                     </Row>

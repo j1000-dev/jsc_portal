@@ -14,13 +14,11 @@ class RoleSeeder extends Seeder
      */
     public function run(): void
     {
-        $role = new Role();
-        foreach (config('seeder.roles') as $r) {
-            $role->create($r);
-        }
         foreach (config('seeder.users') as $u) {
             $user = User::where('email', $u['email'])->first();
-            $user->assignRole($u['roles']);
+            if ($user) {
+                $user->assignRole($u['roles']);
+            }
         }
     }
 }
