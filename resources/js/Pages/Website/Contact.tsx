@@ -10,7 +10,7 @@ export default function Contact() {
                     <div className="font-bold">Contact</div>
                     <div className="grid grid-cols-2">
                         <div>Mark Tourigny, President</div>
-                        <div>Mark.Tourigny@gmail.com</div>
+                        <a className="text-sky-600" href="mailto:Mark.Tourigny@gmail.com">Mark.Tourigny@gmail.com</a>
                     </div>
                     <div className="font-bold pt-5">Mailing Address</div>
                     <div>
