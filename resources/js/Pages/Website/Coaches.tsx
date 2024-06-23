@@ -25,9 +25,9 @@ export default function Coaches() {
                     {
                         coaches && coaches.map((c, index) => (
                             <div key={index}>
-                                <Link href={`/coaches/${c.id}`} className="grid grid-cols-2 font-semi-bold cursor-pointer hover:underline">
-                                    <div className="text-blue-900 font-bold">{c.formattedName}</div>
-                                    <div className="text-blue-900">{c.user_info.one_line_bio}</div>
+                                <Link href={`/coaches/${c.id}`} className="grid grid-cols-2 font-semi-bold hover:underline decoration-sky-600">
+                                    <div className="text-sky-600 font-bold">{c.formattedName}</div>
+                                    <div className="text-sky-600">{c.user_info.one_line_bio}</div>
                                 </Link>
                             </div>
                         ))

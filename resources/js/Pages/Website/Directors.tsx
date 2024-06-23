@@ -29,7 +29,7 @@ export default function Directors() {
                                 <div className="col-span-2">
                                     {dir.title} 
                                     {dir.bio && 
-                                        <a href={dir.bio} target="_blank" className="underline text-blue-900 px-2">Bio</a>}
+                                        <a href={dir.bio} target="_blank" className="underline text-sky-600 decoration-sky-600 px-2">Bio</a>}
                                 </div>
                             </React.Fragment>
                         ))}
@@ -42,7 +42,7 @@ export default function Directors() {
                                 <div className="col-span-2">
                                     {dir.title}
                                     {dir.bio && 
-                                        <a href={dir.bio} target="_blank" className="underline text-blue-900 px-2">Bio</a>}
+                                        <a href={dir.bio} target="_blank" className="underline text-sky-600 decoration-sky-600 px-2">Bio</a>}
                                 </div>
                             </React.Fragment>
                         ))}

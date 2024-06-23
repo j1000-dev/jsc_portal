@@ -2,7 +2,6 @@ import { ReactNode, useState, useEffect } from "react"
 import Layout from "@/Layouts/Layout"
 import axios from "axios";
 import { Carousel } from 'antd';
-import { LeftOutlined, RightOutlined } from "@ant-design/icons";
 
 const contentStyle: React.CSSProperties = {
     margin: 0,
