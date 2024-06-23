@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\WebsiteController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SignUpController;
 use App\Http\Controllers\SportsController;
@@ -25,6 +27,10 @@ foreach ($websitePages as $page) {
         return Inertia::render("Website/$component");
     })->name("website.$name");
 }
+Route::get('/api/config-data', [WebsiteController::class, 'getConfigFile']);
+
+Route::get('/api/coaches', [UserController::class, 'index']);
+Route::get('/coaches/{id}', [UserController::class, 'show']);
 
 /**
  * 
