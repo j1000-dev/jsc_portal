@@ -5,7 +5,7 @@ import { Link } from "@inertiajs/react";
 export default function Home() {
     return (
         <div className="flex flex-col items-center">
-            <img className="py-10" src="/img/banner.png" width={1100} />
+            <img className="py-10" src="/img/banner.png" width={1000} />
             <div className="grid grid-cols-4">
                 <div className="col-span-3">
                     <article className="max-w-3xl w-full px-4">

@@ -17,11 +17,12 @@ export default function Directors() {
         {name: "Dr. Douglas Clement", title: "Olympian, Order of Canada, Heart & Stroke Chairman", bio: "/storage/pdf/douglas-clement.pdf"}
     ];
     return (
-        <div className="flex flex-col items-center h-full">
-            <article className="max-w-3xl w-full px-4">
+        <div className="flex flex-col items-center">
+            <img className="pt-10" src="/img/directors-cover1.png" width={1000} />
+            <article className="max-w-3xl w-full px-4 pb-5">
                 <div className="text-left mb-4">
                     <h1 className="text-3xl font-bold pt-10 pb-5">Directors</h1>
-                    <h3 className="font-bold py-2">2018 Volunteer Board Directors</h3>
+                    <h3 className="font-bold py-2 text-red-700">2018 Volunteer Board Directors</h3>
                     <div className="grid grid-cols-3 pb-5">
                         {Object.values(directors).map((dir, index) => (
                             <React.Fragment key={index}>
@@ -34,7 +35,7 @@ export default function Directors() {
                             </React.Fragment>
                         ))}
                     </div>
-                    <h3 className="font-bold py-2">Honorary Founding Directors</h3>
+                    <h3 className="font-bold py-2 text-red-700">Honorary Founding Directors</h3>
                     <div className="grid grid-cols-3">
                         {Object.values(honoraryDirectors).map((dir, index) => (
                             <React.Fragment key={index}>

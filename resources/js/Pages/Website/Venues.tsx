@@ -18,7 +18,7 @@ export default function Venues() {
     }, []);
     return (
         <div className="flex flex-col items-center">
-            <img className="py-10" src="/img/venues-cover.jpg" width={750} />
+            <img className="py-10" src="/img/venues-cover.jpg" width={1000} />
             <article className="max-w-3xl w-full px-4">
                 <div className="text-left mb-4">
                     <h1 className="text-3xl font-bold">Venues</h1>

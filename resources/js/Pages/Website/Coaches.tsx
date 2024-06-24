@@ -15,11 +15,11 @@ export default function Coaches() {
 
     return (
         <div className="flex flex-col items-center p-5">
-            <img className="py-10" src="/img/coaches-cover.jpg" width={750} />
+            <img className="py-10" src="/img/coaches-cover.jpg" width={1000} />
             <article className="max-w-3xl w-full px-4">
                 <div className="text-left mb-4">
                     <h1 className="text-3xl font-bold pb-3">Coaches</h1>
-                    <h2 className="font-bold">(click on the coach's name for a bio)</h2>
+                    <h2 className="font-bold">(Click on a coach's name for a bio)</h2>
                 </div>
                 <div className="mx-auto">
                     {
